@@ -53,7 +53,6 @@
     <Compile Include="Entities\CatVendorProductCandidateSalesPriceEntity.cs" />
     <Compile Include="Entities\CatVendorProductCandidateTranslationEntity.cs" />
     <Compile Include="Entities\Document.cs" />
-    <Compile Include="ObjectToXMLCreator.cs" />
     <Compile Include="ProductBuiler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
