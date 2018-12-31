@@ -58,9 +58,9 @@ namespace D365GenerateVendorCatalog
                 },
                 CatVendorProductCandidateTranslationEntity = new CatVendorProductCandidateTranslationEntity
                 {
-                    Description = "Product description",
-                    LanguageId = "en-au",
-                    ProductName = $"{productName} ({productNumber})"
+                    Description = $"({productNumber}) {productName}",
+                    LanguageId = "en-us",
+                    ProductName = $"{productName}"
                 }
             };
         }
