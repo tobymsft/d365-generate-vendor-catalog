@@ -17,17 +17,22 @@ namespace D365GenerateVendorCatalog
             {
                 Console.Write("How many vendor catalog lines do you want to generate?:  ");
                 strNumVendorCatalogLines = Console.ReadLine();
+
+                if (!int.TryParse(strNumVendorCatalogLines, out numVendorCatalogLines))
+                {
+                    Console.WriteLine("\nYou must enter a valid number.\n");
+                }
+
             } while (!int.TryParse(strNumVendorCatalogLines, out numVendorCatalogLines));
 
             
 
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(Document));
 
-            var productNumberGroup = new Random().Next(1, int.MaxValue).ToString();
             var productsList = new List<CatVendorProductCandidateEntity>(); 
             for (int i = 0; i < numVendorCatalogLines; i++)
             {
-                productsList.Add(new ProductBuilder().WithProductNumber($"{productNumberGroup}-{i+1}"));
+                productsList.Add(new ProductBuilder());
             }
 
             var document = new Document

@@ -1,13 +1,13 @@
 ﻿using System;
+using Bogus;
 using D365GenerateVendorCatalog.Entities;
 
 namespace D365GenerateVendorCatalog
 {
     public class ProductBuilder
     {
-
-        private string _productNumber = Guid.NewGuid().ToString();//new Random().Next(1, Int32.MaxValue).ToString();
-
+        private Faker _faker = new Faker();
+        
         public static implicit operator CatVendorProductCandidateEntity(ProductBuilder instance)
         {
             return instance.Build();
@@ -15,15 +15,21 @@ namespace D365GenerateVendorCatalog
 
         public CatVendorProductCandidateEntity Build()
         {
+
+            string productName = _faker.Commerce.ProductName();
+            string productBarcodEan13 = _faker.Commerce.Ean13();
+            string productNumber = _faker.Random.AlphaNumeric(10);
+
+
             return new CatVendorProductCandidateEntity
             {
                 ProductCategoryHierarchyName = "Procurement - Office Supplies",
                 ActionType = "Add",
                 ProductCategoryName = "OFFICE MACHINES",
-                ProductNumber = _productNumber,
-                SearchName = "SearchName",
+                ProductNumber = productNumber,
+                SearchName = productName.Replace(" ", string.Empty),
                 ProductSubtype = "Product",
-                Barcode = _productNumber,
+                Barcode = productBarcodEan13,
                 ProductColorId = string.Empty,
                 ProductConfigurationId = string.Empty,
                 ProductSizeId = string.Empty,
@@ -54,17 +60,11 @@ namespace D365GenerateVendorCatalog
                 {
                     Description = "Product description",
                     LanguageId = "en-au",
-                    ProductName = $"Product Name ({_productNumber})"
+                    ProductName = $"{productName} ({productNumber})"
                 }
             };
         }
 
 
-        public ProductBuilder WithProductNumber(string productNumber)
-        {
-            _productNumber = productNumber;
-            return this;
-        }
-    
     }
 }
